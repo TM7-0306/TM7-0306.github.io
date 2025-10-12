@@ -32,10 +32,12 @@
         }
         .video-thumbnail {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; /* z-indexを有効にするために追加 */
         }
         .video-thumbnail:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+            z-index: 20; /* ホバー時に手前に表示させる */
         }
         .glow-button {
             transition: all 0.3s ease;
@@ -71,6 +73,28 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        /* Scroll-to-top button */
+        #scrollToTopBtn {
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        /* Fade-in animation */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Custom scrollbar hide */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -80,18 +104,18 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="text-3xl font-black tracking-wider text-white">TM7</div>
-                <nav class="hidden md:flex items-center space-x-4">
-                    <a href="#bluearchive-gacha" class="text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">ブルアカガチャ</a>
-                    <a href="#limbus-gacha" class="text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">リンバスガチャ</a>
-                    <a href="#limbus-streams" class="text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">リンバス配信</a>
-                    <a href="#bluearchive-streams" class="text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">ブルアカ配信</a>
-                    <a href="#gemini-feature" class="text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">AI願掛け</a>
-                    <a href="#about" class="text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">About</a>
+                <nav id="mobile-menu" class="hidden absolute md:relative top-full left-0 w-full bg-slate-900 md:bg-transparent md:flex md:items-center md:space-x-4 md:w-auto">
+                    <a href="#bluearchive-gacha" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">ブルアカガチャ</a>
+                    <a href="#limbus-gacha" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">リンバスガチャ</a>
+                    <a href="#limbus-streams" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">リンバス配信</a>
+                    <a href="#bluearchive-streams" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">ブルアカ配信</a>
+                    <a href="#gemini-feature" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">AI願掛け</a>
+                    <a href="#about" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">About</a>
                 </nav>
                 <a href="https://www.youtube.com/@TM7_0306?sub_confirmation=1" target="_blank" class="hidden md:inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-2 px-5 rounded-full hover:from-purple-500 hover:to-pink-500 transition-all duration-300 glow-button">
                     チャンネル登録
                 </a>
-                <button class="md:hidden text-white focus:outline-none">
+                <button id="hamburger-button" class="md:hidden text-white focus:outline-none">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
@@ -106,7 +130,7 @@
                     TM7
                 </h1>
                 <p class="text-lg md:text-2xl text-purple-200 font-light mb-8 max-w-2xl mx-auto">
-                    ブルーアーカイブ & リンバスカンパニーの世界へ。TM7の最新動画と配信をチェック。
+                    ブルーアーカイブ & リンバスカンパニーの世界へ。<br>TM7の最新動画と配信をチェック。
                 </p>
                 <a href="https://www.youtube.com/@TM7_0306/videos" target="_blank" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 px-10 rounded-full text-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 glow-button inline-flex items-center">
                     <i class="fab fa-youtube mr-3"></i> 最新の動画をチェック
@@ -115,130 +139,177 @@
         </section>
 
         <!-- 【ブルアカ】ガチャ動画 Section -->
-        <section id="bluearchive-gacha" class="py-20 bg-slate-900/50">
+        <section id="bluearchive-gacha" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【ブルアカ】ガチャ動画</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="https://www.youtube.com/watch?v=F_f-VzK4Zz0" target="_blank" class="bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/F_f-VzK4Zz0/hqdefault.jpg" alt="【ブルアカ】天井覚悟で正月フウカ、ハルナを引く配信" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】天井覚悟で正月フウカ、ハルナを引く配信</h3>
-                            <p class="text-gray-400 text-base">限定の正月フウカとハルナを狙ってガチャに挑戦！</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=Xn78iX6F37Q" target="_blank" class="bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/Xn78iX6F37Q/hqdefault.jpg" alt="【ブルアカ】ドレスヒナ、アコを引く漢の3天井ガチャ" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】ドレスヒナ、アコを引く漢の3天井ガチャ</h3>
-                            <p class="text-gray-400 text-base">ドレスヒナとアコを求めて、怒涛の3天井ガチャ！</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=Kz6M8T7B1J4" target="_blank" class="bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/Kz6M8T7B1J4/hqdefault.jpg" alt="【ブルアカ】水着ホシノと水着ノノミを引く配信" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】水着ホシノと水着ノノミを引く配信</h3>
-                            <p class="text-gray-400 text-base">夏の限定、水着ホシノと水着ノノミのガチャ配信。</p>
-                        </div>
-                    </a>
+                <div class="relative scroll-section">
+                    <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
+                        <a href="https://www.youtube.com/watch?v=F_f-VzK4Zz0" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/F_f-VzK4Zz0/hqdefault.jpg" alt="【ブルアカ】「「「「　リ　ツ　な　の　だ　」」」」" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】「「「「　リ　ツ　な　の　だ　」」」」</h3>
+                                <p class="text-gray-400 text-base">リツを狙ってガチャに挑戦！</p>
+                            </div>
+                        </a>
+                        <a href="https://youtu.be/pCLGUvtAc-4" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/Xn78iX6F37Q/hqdefault.jpg" alt="【ブルアカ】久方ぶりの邂逅...いや、4周年ぶりだね" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】久方ぶりの邂逅...いや、4周年ぶりだね</h3>
+                                <p class="text-gray-400 text-base">水着セイアを狙ってガチャに挑戦！</p>
+                            </div>
+                        </a>
+                        <a href="https://youtu.be/g5qotp4D_MA" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/Kz6M8T7B1J4/hqdefault.jpg" alt="【ブルアカ】止まるんじゃねぇぞ…！シュポガキ天井列車編" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】止まるんじゃねぇぞ…！シュポガキ天井列車編</h3>
+                                <p class="text-gray-400 text-base">初ガチャ動画！シュポガキを狙ってガチャに挑戦！</p>
+                            </div>
+                        </a>
+                    </div>
+                    <button class="scroll-btn left-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-left text-white"></i>
+                    </button>
+                    <button class="scroll-btn right-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-right text-white"></i>
+                    </button>
                 </div>
             </div>
         </section>
         
         <!-- 【リンバス】ガチャ動画 Section -->
-        <section id="limbus-gacha" class="py-20 bg-slate-800/50">
+        <section id="limbus-gacha" class="py-20 bg-slate-800/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【リンバス】ガチャ動画</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="https://www.youtube.com/watch?v=9j9w-rX2W7g" target="_blank" class="bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/9j9w-rX2W7g/hqdefault.jpg" alt="【リンバス】Wドンキ、Wリョウシュウを引くガチャ" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【リンバス】Wドンキ、Wリョウシュウを引くガチャ</h3>
-                            <p class="text-gray-400 text-base">W社のドン・キホーテと良秀を狙ってガチャを回します。</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=mC9o7oG5N6Q" target="_blank" class="bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/mC9o7oG5N6Q/hqdefault.jpg" alt="【リンバス】ディエーチロージャを引くガチャ" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【リンバス】ディエーチロージャを引くガチャ</h3>
-                            <p class="text-gray-400 text-base">ディエーチ協会のロージャ人格抽出に挑戦！</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=hG9n4V8f8D8" target="_blank" class="bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/hG9n4V8f8D8/hqdefault.jpg" alt="【リンバス】握るものファウストを引くガチャ" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【リンバス】握るものファウストを引くガチャ</h3>
-                            <p class="text-gray-400 text-base">N社の「握るもの」ファウストを求めて狂気を使う。</p>
-                        </div>
-                    </a>
+                <div class="relative scroll-section">
+                    <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
+                        <a href="https://youtu.be/MKK95k6py9U" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/9j9w-rX2W7g/hqdefault.jpg" alt="【リンバス】魔法少女ドンキの可愛さ、マジやばくね？引くしかねぇだろッ！！！" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】魔法少女ドンキの可愛さ、マジやばくね？引くしかねぇだろッ！！！</h3>
+                                <p class="text-gray-400 text-base">憎しみの女王ドンキ・絶望の騎士ロージャを狙ってガチャに挑戦！</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=mC9o7oG5N6Q" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/mC9o7oG5N6Q/hqdefault.jpg" alt="【リンバス】タイトル" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】タイトル</h3>
+                                <p class="text-gray-400 text-base">説明</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=hG9n4V8f8D8" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/hG9n4V8f8D8/hqdefault.jpg" alt="【リンバス】タイトル" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】タイトル</h3>
+                                <p class="text-gray-400 text-base">説明</p>
+                            </div>
+                        </a>
+                    </div>
+                    <button class="scroll-btn left-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-left text-white"></i>
+                    </button>
+                    <button class="scroll-btn right-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-right text-white"></i>
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- 【リンバス】配信アーカイブ Section -->
-        <section id="limbus-streams" class="py-20 bg-slate-900/50">
+        <section id="limbus-streams" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【リンバス】配信アーカイブ</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                     <a href="https://www.youtube.com/watch?v=HcLP6meh_a8" target="_blank" class="bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/HcLP6meh_a8/hqdefault.jpg" alt="【リンバスカンパニー】新人管理人、鏡の屈折鉄道に挑む" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【リンバスカンパニー】新人管理人、鏡の屈折鉄道に挑む</h3>
-                            <p class="text-gray-400 text-base">リンバス・カンパニーの鏡の屈折鉄道に初挑戦！</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=S0y_6m5r5u0" target="_blank" class="bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/S0y_6m5r5u0/hqdefault.jpg" alt="【リンバスカンパニー】新人管理人、鏡の屈折鉄道に挑む part2" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【リンバスカンパニー】新人管理人、鏡の屈折鉄道に挑む part2</h3>
-                            <p class="text-gray-400 text-base">屈折鉄道攻略の続き。果たしてクリアできるのか…</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=Fj-y5_m_1z4" target="_blank" class="bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/Fj-y5_m_1z4/hqdefault.jpg" alt="【リンバスカンパニー】新人管理人、鏡の屈折鉄道に挑む part3" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【リンバスカンパニー】新人管理人、鏡の屈折鉄道に挑む part3</h3>
-                            <p class="text-gray-400 text-base">三度目の正直なるか！？屈折鉄道との激闘。</p>
-                        </div>
-                    </a>
+                 <div class="relative scroll-section">
+                    <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
+                         <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3FvvC5RmnnDXJ1uk9lbzhC" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/HcLP6meh_a8/hqdefault.jpg" alt="【リンバス】8.5章配信アーカイブ" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】8.5章配信アーカイブ</h3>
+                                <p class="text-gray-400 text-base">リンバスの8.5章配信一覧です！</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3hLBOuUN28NdEeBuBFvANx" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/S0y_6m5r5u0/hqdefault.jpg" alt="【リンバス】ヴァルプル配信アーカイブ" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】ヴァルプル配信アーカイブ</h3>
+                                <p class="text-gray-400 text-base">リンバスのヴァルプルギスの夜イベント配信一覧です！</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3ab7zs48bc0qh0wPz8j2fW" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/Fj-y5_m_1z4/hqdefault.jpg" alt="【リンバス】8章配信アーカイブ" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】8章配信アーカイブ</h3>
+                                <p class="text-gray-400 text-base">リンバスの8章配信一覧です！</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw39YDi-4dm7k3fqs7tceWE7" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/Fj-y5_m_1z4/hqdefault.jpg" alt="【リンバス】7.5章配信アーカイブ" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】7.5章配信アーカイブ</h3>
+                                <p class="text-gray-400 text-base">リンバスの7.5章配信一覧です！</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw2V_eisjp-NYyUPXt9HsX2C" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/Fj-y5_m_1z4/hqdefault.jpg" alt="【リンバス】7章配信アーカイブ" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【リンバス】7章配信アーカイブ</h3>
+                                <p class="text-gray-400 text-base">リンバスの7章配信一覧です！</p>
+                            </div>
+                        </a>
+                    </div>
+                    <button class="scroll-btn left-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-left text-white"></i>
+                    </button>
+                    <button class="scroll-btn right-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-right text-white"></i>
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- 【ブルアカ】配信アーカイブ Section -->
-        <section id="bluearchive-streams" class="py-20 bg-slate-800/50">
+        <section id="bluearchive-streams" class="py-20 bg-slate-800/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【ブルアカ】配信アーカイブ</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="https://www.youtube.com/watch?v=bMv62_gA8Fk" target="_blank" class="bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/bMv62_gA8Fk/hqdefault.jpg" alt="【ブルアカ】アロナちゃんねる出張版~新春SP~ を見る配信" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】アロナちゃんねる出張版~新春SP~ を見る配信</h3>
-                            <p class="text-gray-400 text-base">アロナちゃんねるの新春SPを視聴者と一緒に楽しむ配信です。</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=O8gL_x99oDI" target="_blank" class="bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/O8gL_x99oDI/hqdefault.jpg" alt="【ブルアカ】メインストーリーvol1 最終編 第４章 を見る配信" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】メインストーリーvol1 最終編 第４章 を見る配信</h3>
-                            <p class="text-gray-400 text-base">メインストーリー最終編の第４章を一緒に見ていきましょう。ネタバレ注意！</p>
-                        </div>
-                    </a>
-                    <a href="https://www.youtube.com/watch?v=lO-f7h9d1nI" target="_blank" class="bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
-                        <img src="https://i.ytimg.com/vi/lO-f7h9d1nI/hqdefault.jpg" alt="【ブルアカ】メインストーリーvol1 最終編 第３章 を見る配信" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】メインストーリーvol1 最終編 第３章 を見る配信</h3>
-                            <p class="text-gray-400 text-base">感動の最終編、第３章のストーリーを追います。</p>
-                        </div>
-                    </a>
+                 <div class="relative scroll-section">
+                    <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw2rfWNRqiNIjWoXptBNA93_" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/bMv62_gA8Fk/hqdefault.jpg" alt="【ブルアカ】イベント配信アーカイブ" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】イベント配信アーカイブ</h3>
+                                <p class="text-gray-400 text-base">ブルアカのイベント配信一覧です！</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=O8gL_x99oDI" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/O8gL_x99oDI/hqdefault.jpg" alt="【ブルアカ】タイトル" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】タイトル</h3>
+                                <p class="text-gray-400 text-base">説明</p>
+                            </div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=lO-f7h9d1nI" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                            <img src="https://i.ytimg.com/vi/lO-f7h9d1nI/hqdefault.jpg" alt="【ブルアカ】タイトル" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】タイトル</h3>
+                                <p class="text-gray-400 text-base">説明</p>
+                            </div>
+                        </a>
+                    </div>
+                    <button class="scroll-btn left-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-left text-white"></i>
+                    </button>
+                    <button class="scroll-btn right-2 absolute top-1/2 -translate-y-1/2 bg-slate-800/50 hover:bg-slate-700/80 p-2 rounded-full z-30 transition-colors duration-300 w-10 h-10 flex items-center justify-center">
+                        <i class="fas fa-chevron-right text-white"></i>
+                    </button>
                 </div>
             </div>
         </section>
 
         <!-- Gemini AI Feature Section -->
-        <section id="gemini-feature" class="py-20 bg-slate-900/50">
+        <section id="gemini-feature" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 text-gradient">✨ AI ガチャ願掛け ✨</h2>
-                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">ガチャで最高の引きをしたいあなたへ。Gemini AIがユニークな願掛けの儀式を生成します。ボタンを押して、あなただけの儀式を授かろう！</p>
+                <p class="text-gray-300 mb-8 max-w-2xl mx-auto">ガチャで最高の引きをしたいあなたへ。欲しいキャラクター名を入力して、あなただけのユニークな願掛け儀式をAIに生成してもらいましょう！</p>
+                <input id="character-input" type="text" placeholder="例：水着ホシノ" class="w-full max-w-md mx-auto mb-4 bg-slate-800 border border-purple-500/50 text-white rounded-full py-3 px-6 focus:outline-none focus:ring-2 focus:ring-purple-500">
                 <div id="ritual-result" class="min-h-[100px] bg-slate-800/50 rounded-lg max-w-3xl mx-auto mb-8 flex items-center justify-center p-6 border border-purple-500/30 shadow-inner">
                     <p class="text-gray-400">ここに儀式が表示されます...</p>
                 </div>
@@ -249,11 +320,11 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-20 bg-slate-800/50">
+        <section id="about" class="py-20 bg-slate-800/50 fade-in-section">
             <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="flex flex-col md:flex-row-reverse items-center gap-12">
                     <div class="md:w-1/2 flex justify-center">
-                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_kM4zLwY4U7d2s3b5j6k1f8h_9g_k5a_1h_7A=s176-c-k-c0x00ffffff-no-rj" alt="TM7のプロフィール画像" class="rounded-full shadow-2xl w-64 h-64 md:w-96 md:h-96 profile-border object-cover">
+                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_nHycBvdWyLF7srJjJ8qASCa3RQJxI8kyGX5V3EXjatQw=s160-c-k-c0x00ffffff-no-rj" alt="TM7のプロフィール画像" class="rounded-full shadow-2xl w-64 h-64 md:w-96 md:h-96 profile-border object-cover">
                     </div>
                     <div class="md:w-1/2 text-center md:text-left">
                         <h2 class="text-4xl font-bold text-white mb-4 text-gradient">TM7について</h2>
@@ -283,27 +354,65 @@
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="fixed bottom-5 right-5 w-12 h-12 bg-pink-600/80 text-white rounded-full hidden justify-center items-center shadow-lg hover:bg-pink-500 transition-all duration-300 z-50">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Mobile Menu Toggle ---
+            const hamburgerButton = document.getElementById('hamburger-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            hamburgerButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // --- Scroll to Top Button ---
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.remove('hidden');
+                    scrollToTopBtn.classList.add('flex');
+                } else {
+                    scrollToTopBtn.classList.add('hidden');
+                    scrollToTopBtn.classList.remove('flex');
+                }
+            });
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- Scroll Animation ---
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            // --- Gemini AI Feature ---
             const generateButton = document.getElementById('generate-ritual-btn');
             const ritualResultDiv = document.getElementById('ritual-result');
+            const characterInput = document.getElementById('character-input');
 
-            // Function to fetch from Gemini API with exponential backoff
             const fetchWithRetry = async (url, options, retries = 3, delay = 1000) => {
                 for (let i = 0; i < retries; i++) {
                     try {
                         const response = await fetch(url, options);
-                        if (response.ok) {
-                            return response;
-                        }
-                        // Do not retry on client-side errors, only server-side
-                        if (response.status >= 400 && response.status < 500) {
-                            throw new Error(`Client Error: ${response.status}`);
-                        }
+                        if (response.ok) return response;
+                        if (response.status >= 400 && response.status < 500) throw new Error(`Client Error: ${response.status}`);
                     } catch (error) {
                          if (i === retries - 1) throw error;
                     }
-                    // Wait before retrying
                     await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
                 }
                  throw new Error('API request failed after multiple retries.');
@@ -313,22 +422,19 @@
                 ritualResultDiv.innerHTML = `<div class="loader"></div>`;
                 generateButton.disabled = true;
 
+                const characterName = characterInput.value.trim();
+                const userQuery = characterName 
+                    ? `「${characterName}」を引くためのガチャの儀式を生成してください。` 
+                    : "何か面白いガチャの儀式を生成してください。";
+                
                 const systemPrompt = "あなたはガチャを愛する神託者です。『ブルーアーカイブ』や『リンバス・カンパニー』のようなゲームでガチャを引こうとしているプレイヤーのために、短くて面白く、少し馬鹿げた「幸運の儀式」を生成してください。儀式は1〜2文で、創造的でユーモラスな内容にしてください。必ず日本語で応答してください。";
-                const userQuery = "ガチャの儀式を生成してください。";
-                const apiKey = ""; // APIキーは実行環境で自動的に提供されます
+                const apiKey = "";
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 const payload = {
                     contents: [{ parts: [{ text: userQuery }] }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                    generationConfig: {
-                        temperature: 0.9,
-                        topK: 1,
-                        topP: 1,
-                        maxOutputTokens: 2048,
-                    },
+                    systemInstruction: { parts: [{ text: systemPrompt }] },
+                    generationConfig: { temperature: 0.9, topK: 1, topP: 1, maxOutputTokens: 2048 },
                 };
 
                 try {
@@ -346,7 +452,6 @@
                     } else {
                          throw new Error('APIから有効な応答がありませんでした。');
                     }
-
                 } catch (error) {
                     console.error('Error generating ritual:', error);
                     ritualResultDiv.innerHTML = `<p class="text-red-400 text-center p-4">エラーが発生しました。しばらくしてからもう一度お試しください。</p>`;
@@ -354,9 +459,43 @@
                     generateButton.disabled = false;
                 }
             });
+
+            // --- Horizontal Scroll with Arrows ---
+            const scrollSections = document.querySelectorAll('.scroll-section');
+            scrollSections.forEach(section => {
+                const container = section.querySelector('.scroll-container');
+                const leftBtn = section.querySelector('.scroll-btn.left-2');
+                const rightBtn = section.querySelector('.scroll-btn.right-2');
+                
+                const updateArrowVisibility = () => {
+                    const isAtStart = container.scrollLeft < 1;
+                    const isAtEnd = container.scrollWidth - container.clientWidth - container.scrollLeft < 1;
+                    leftBtn.classList.toggle('hidden', isAtStart);
+                    rightBtn.classList.toggle('hidden', isAtEnd);
+                };
+
+                leftBtn.addEventListener('click', () => {
+                    const scrollAmount = container.clientWidth * 0.8;
+                    container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+
+                rightBtn.addEventListener('click', () => {
+                    const scrollAmount = container.clientWidth * 0.8;
+                    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+
+                setTimeout(() => {
+                    if (container.scrollWidth > container.clientWidth) {
+                         container.addEventListener('scroll', updateArrowVisibility, { passive: true });
+                         updateArrowVisibility();
+                    } else {
+                        leftBtn.classList.add('hidden');
+                        rightBtn.classList.add('hidden');
+                    }
+                }, 100);
+            });
         });
     </script>
 
 </body>
 </html>
-
