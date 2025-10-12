@@ -95,6 +95,21 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+
+        /* --- Image Protection --- */
+        .protected-image-container {
+            position: relative;
+        }
+        .protected-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 21; /* Must be higher than hover z-index */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -144,21 +159,21 @@
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【ブルアカ】ガチャ動画</h2>
                 <div class="relative scroll-section">
                     <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
-                        <a href="https://youtu.be/D3JKtrgP3As" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                        <a href="https://youtu.be/D3JKtrgP3As" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/D3JKtrgP3As/hqdefault.jpg" alt="【ブルアカ】「「「「　リ　ツ　な　の　だ　」」」」" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】「「「「　リ　ツ　な　の　だ　」」」」</h3>
                                 <p class="text-gray-400 text-base">リツを狙ってガチャに挑戦！</p>
                             </div>
                         </a>
-                        <a href="https://youtu.be/pCLGUvtAc-4" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                        <a href="https://youtu.be/pCLGUvtAc-4" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/pCLGUvtAc-4/hqdefault.jpg" alt="【ブルアカ】久方ぶりの邂逅...いや、4周年ぶりだね" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】久方ぶりの邂逅...いや、4周年ぶりだね</h3>
                                 <p class="text-gray-400 text-base">水着セイアを狙ってガチャに挑戦！</p>
                             </div>
                         </a>
-                        <a href="https://youtu.be/g5qotp4D_MA" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
+                        <a href="https://youtu.be/g5qotp4D_MA" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/g5qotp4D_MA/hqdefault.jpg" alt="【ブルアカ】止まるんじゃねぇぞ…！シュポガキ天井列車編" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】止まるんじゃねぇぞ…！シュポガキ天井列車編</h3>
@@ -182,21 +197,21 @@
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【リンバス】ガチャ動画</h2>
                 <div class="relative scroll-section">
                     <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
-                        <a href="https://youtu.be/MKK95k6py9U" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                        <a href="https://youtu.be/MKK95k6py9U" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/MKK95k6py9U/hqdefault.jpg" alt="【リンバス】魔法少女ドンキの可愛さ、マジやばくね？引くしかねぇだろッ！！！" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】魔法少女ドンキの可愛さ、マジやばくね？引くしかねぇだろッ！！！</h3>
                                 <p class="text-gray-400 text-base">憎しみの女王ドンキ・絶望の騎士ロージャを狙ってガチャに挑戦！</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=mC9o7oG5N6Q" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                        <a href="https://www.youtube.com/watch?v=mC9o7oG5N6Q" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/mC9o7oG5N6Q/hqdefault.jpg" alt="【リンバス】タイトル" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】タイトル</h3>
                                 <p class="text-gray-400 text-base">説明</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=hG9n4V8f8D8" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                        <a href="https://www.youtube.com/watch?v=hG9n4V8f8D8" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/hG9n4V8f8D8/hqdefault.jpg" alt="【リンバス】タイトル" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】タイトル</h3>
@@ -220,36 +235,36 @@
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【リンバス】配信アーカイブ</h2>
                  <div class="relative scroll-section">
                     <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
-                         <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3FvvC5RmnnDXJ1uk9lbzhC" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                            <img src="https://i.ytimg.com/vi/PL_UmcurlIUw3FvvC5RmnnDXJ1uk9lbzhC/hqdefault.jpg" alt="【リンバス】8.5章配信アーカイブ" class="w-full h-48 object-cover">
+                         <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3FvvC5RmnnDXJ1uk9lbzhC" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
+                            <img src="https://i.ytimg.com/vi/KKk_WZEXn8M/hqdefault.jpg" alt="【リンバス】8.5章配信アーカイブ" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】8.5章配信アーカイブ</h3>
                                 <p class="text-gray-400 text-base">リンバスの8.5章配信一覧です！</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3hLBOuUN28NdEeBuBFvANx" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                            <img src="https://i.ytimg.com/vi/PL_UmcurlIUw3hLBOuUN28NdEeBuBFvANx/hqdefault.jpg" alt="【リンバス】ヴァルプル配信アーカイブ" class="w-full h-48 object-cover">
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3hLBOuUN28NdEeBuBFvANx" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
+                            <img src="https://i.ytimg.com/vi/Zj7iN70gT1o/hqdefault.jpg" alt="【リンバス】ヴァルプル配信アーカイブ" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】ヴァルプル配信アーカイブ</h3>
                                 <p class="text-gray-400 text-base">リンバスのヴァルプルギスの夜イベント配信一覧です！</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3ab7zs48bc0qh0wPz8j2fW" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                            <img src="https://i.ytimg.com/vi/PL_UmcurlIUw3ab7zs48bc0qh0wPz8j2fW/hqdefault.jpg" alt="【リンバス】8章配信アーカイブ" class="w-full h-48 object-cover">
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw3ab7zs48bc0qh0wPz8j2fW" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
+                            <img src="https://i.ytimg.com/vi/UmnYbHd40nc/hqdefault.jpg" alt="【リンバス】8章配信アーカイブ" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】8章配信アーカイブ</h3>
                                 <p class="text-gray-400 text-base">リンバスの8章配信一覧です！</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw39YDi-4dm7k3fqs7tceWE7" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                            <img src="https://i.ytimg.com/vi/PL_UmcurlIUw39YDi-4dm7k3fqs7tceWE7/hqdefault.jpg" alt="【リンバス】7.5章配信アーカイブ" class="w-full h-48 object-cover">
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw39YDi-4dm7k3fqs7tceWE7" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
+                            <img src="https://i.ytimg.com/vi/I2MMwFIyGSs/hqdefault.jpg" alt="【リンバス】7.5章配信アーカイブ" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】7.5章配信アーカイブ</h3>
                                 <p class="text-gray-400 text-base">リンバスの7.5章配信一覧です！</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw2V_eisjp-NYyUPXt9HsX2C" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block">
-                            <img src="https://i.ytimg.com/vi/PL_UmcurlIUw2V_eisjp-NYyUPXt9HsX2C/hqdefault.jpg" alt="【リンバス】7章配信アーカイブ" class="w-full h-48 object-cover">
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw2V_eisjp-NYyUPXt9HsX2C" target="_blank" class="w-80 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden shadow-2xl shadow-purple-900/20 video-thumbnail block protected-image-container">
+                            <img src="https://i.ytimg.com/vi/Vx_wEkJYi_0/hqdefault.jpg" alt="【リンバス】7章配信アーカイブ" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【リンバス】7章配信アーカイブ</h3>
                                 <p class="text-gray-400 text-base">リンバスの7章配信一覧です！</p>
@@ -272,21 +287,21 @@
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【ブルアカ】配信アーカイブ</h2>
                  <div class="relative scroll-section">
                     <div class="scroll-container flex overflow-x-auto space-x-8 py-8 px-8 scrollbar-hide">
-                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw2rfWNRqiNIjWoXptBNA93_" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
-                            <img src="https://i.ytimg.com/vi/PL_UmcurlIUw2rfWNRqiNIjWoXptBNA93_/hqdefault.jpg" alt="【ブルアカ】イベント配信アーカイブ" class="w-full h-48 object-cover">
+                        <a href="https://www.youtube.com/playlist?list=PL_UmcurlIUw2rfWNRqiNIjWoXptBNA93_" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block protected-image-container">
+                            <img src="https://i.ytimg.com/vi/Meqhqh6ilSk/hqdefault.jpg" alt="【ブルアカ】イベント配信アーカイブ" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】イベント配信アーカイブ</h3>
                                 <p class="text-gray-400 text-base">ブルアカのイベント配信一覧です！</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=O8gL_x99oDI" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                        <a href="https://www.youtube.com/watch?v=O8gL_x99oDI" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/O8gL_x99oDI/hqdefault.jpg" alt="【ブルアカ】タイトル" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】タイトル</h3>
                                 <p class="text-gray-400 text-base">説明</p>
                             </div>
                         </a>
-                        <a href="https://www.youtube.com/watch?v=lO-f7h9d1nI" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block">
+                        <a href="https://www.youtube.com/watch?v=lO-f7h9d1nI" target="_blank" class="w-80 flex-shrink-0 bg-slate-700 rounded-lg overflow-hidden shadow-2xl shadow-pink-900/20 video-thumbnail block protected-image-container">
                             <img src="https://i.ytimg.com/vi/lO-f7h9d1nI/hqdefault.jpg" alt="【ブルアカ】タイトル" class="w-full h-48 object-cover">
                             <div class="p-6">
                                 <h3 class="font-bold text-xl mb-2 text-white">【ブルアカ】タイトル</h3>
@@ -324,7 +339,7 @@
             <div class="container mx-auto px-6">
                 <div class="flex flex-col md:flex-row-reverse items-center gap-12">
                     <div class="md:w-1/2 flex justify-center">
-                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_nHycBvdWyLF7srJjJ8qASCa3RQJxI8kyGX5V3EXjatQw=s160-c-k-c0x00ffffff-no-rj" alt="TM7のプロフィール画像" class="rounded-full shadow-2xl w-64 h-64 md:w-96 md:h-96 profile-border object-cover">
+                        <img src="https://yt3.googleusercontent.com/ytc/AIdro_nHycBvdWyLF7srJjJ8qASCa3RQJxI8kyGX5V3EXjatQw=s160-c-k-c0x00ffffff-no-rj" alt="TM7のプロフィール画像" class="rounded-full shadow-2xl w-64 h-64 md:w-96 md:h-96 profile-border object-cover protected-image-container">
                     </div>
                     <div class="md:w-1/2 text-center md:text-left">
                         <h2 class="text-4xl font-bold text-white mb-4 text-gradient">TM7について</h2>
@@ -361,6 +376,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Disable Right-Click Context Menu ---
+            document.addEventListener('contextmenu', event => event.preventDefault());
+            
             // --- Mobile Menu Toggle ---
             const hamburgerButton = document.getElementById('hamburger-button');
             const mobileMenu = document.getElementById('mobile-menu');
