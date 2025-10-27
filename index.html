@@ -137,6 +137,7 @@
                     <a href="#bluearchive-streams" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">ブルアカ配信</a>
                     <a href="#gemini-feature" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">AI願掛け</a>
                     <a href="#gemini-scenario-feature" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">AIシナリオ</a>
+                    <a href="#mini-game" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">ミニゲーム</a>
                     <a href="#about" class="block md:inline-block px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors duration-300 text-sm">About Me</a>
                 </nav>
                 <a href="https://www.youtube.com/@TM7_0306?sub_confirmation=1" target="_blank" class="hidden md:inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-2 px-5 rounded-full hover:from-purple-500 hover:to-pink-500 transition-all duration-300 glow-button">
@@ -235,7 +236,7 @@
         </section>
         
         <!-- 【リンバス】ガチャ動画 Section -->
-        <section id="limbus-gacha" class="py-20 bg-slate-800/50 fade-in-section">
+        <section id="limbus-gacha" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【リンバス】ガチャ動画</h2>
                 <div class="relative scroll-section">
@@ -273,7 +274,7 @@
         </section>
 
         <!-- 【リンバス】配信アーカイブ Section -->
-        <section id="limbus-streams" class="py-20 bg-slate-900/50 fade-in-section">
+        <section id="limbus-streams" class="py-20 bg-slate-800/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【リンバス】配信アーカイブ</h2>
                  <div class="relative scroll-section">
@@ -325,7 +326,7 @@
         </section>
 
         <!-- 【ブルアカ】配信アーカイブ Section -->
-        <section id="bluearchive-streams" class="py-20 bg-slate-800/50 fade-in-section">
+        <section id="bluearchive-streams" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 text-gradient">【ブルアカ】配信アーカイブ</h2>
                  <div class="relative scroll-section">
@@ -363,7 +364,7 @@
         </section>
 
         <!-- Gemini AI Feature Section -->
-        <section id="gemini-feature" class="py-20 bg-slate-900/50 fade-in-section">
+        <section id="gemini-feature" class="py-20 bg-slate-800/50 fade-in-section">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 text-gradient">✨ AI ガチャ願掛け ✨</h2>
                 <p class="text-gray-300 mb-8 max-w-2xl mx-auto">ガチャで最高の引きをしたいあなたへ。欲しいキャラクター名を入力して、あなただけのユニークな願掛け儀式をAIに生成してもらいましょう！</p>
@@ -378,7 +379,7 @@
         </section>
 
         <!-- Gemini AI Scenario Generator Section -->
-        <section id="gemini-scenario-feature" class="py-20 bg-slate-800/50 fade-in-section">
+        <section id="gemini-scenario-feature" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4 text-gradient">✨ AI ゲームシナリオ工房 ✨</h2>
                 <p class="text-gray-300 mb-8 max-w-2xl mx-auto">好きなキャラクターの名前とゲームを選んで、AIにオリジナルのショートシナリオを生成してもらおう！</p>
@@ -400,8 +401,29 @@
             </div>
         </section>
 
+        <!-- Mini Game Section -->
+        <section id="mini-game" class="py-20 bg-slate-800/50 fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold mb-4 text-gradient">✨ あっちむいてホイ ✨</h2>
+                <p class="text-lg text-blue-200 italic mb-8 max-w-2xl mx-auto">シロコ「 ん、私ともあっちむいてホイをやるべき 」</p>
+                
+                <div id="game-area" class="max-w-md mx-auto bg-slate-900/50 rounded-xl p-8 shadow-2xl border border-purple-500/30">
+                    <div id="game-grid" class="mb-6 rounded-lg overflow-hidden">
+                        <button class="direction-btn" data-direction="up"><i class="fas fa-arrow-up"></i></button>
+                        <button class="direction-btn" data-direction="left"><i class="fas fa-arrow-left"></i></button>
+                        <div class="game-center">
+                            <span id="shiroko-face">🐺</span>
+                        </div>
+                        <button class="direction-btn" data-direction="right"><i class="fas fa-arrow-right"></i></button>
+                        <button class="direction-btn" data-direction="down"><i class="fas fa-arrow-down"></i></button>
+                    </div>
+                    <p id="game-result-text" class="text-xl h-12 text-white font-bold">あなたの向きを選んでください</p>
+                </div>
+            </div>
+        </section>
+        
         <!-- About Section -->
-        <section id="about" class="py-20 bg-slate-800/50 fade-in-section">
+        <section id="about" class="py-20 bg-slate-900/50 fade-in-section">
             <div class="container mx-auto px-6">
                 <div class="flex flex-col md:flex-row-reverse items-center gap-12">
                     <div class="md:w-1/2 flex justify-center protected-image-container">
@@ -422,7 +444,7 @@
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-slate-900 text-gray-400 py-12">
+    <footer id="contact" class="bg-slate-800 text-gray-400 py-12">
         <div class="container mx-auto px-6 text-center">
             <p class="text-2xl font-bold mb-4 text-gradient">TM7をフォロー</p>
             <div class="flex justify-center space-x-6 mb-8">
@@ -611,6 +633,56 @@
                 } finally {
                     generateScenarioButton.disabled = false;
                 }
+            });
+
+            // --- Mini Game: Acchi Muite Hoi ---
+            const directionButtons = document.querySelectorAll('.direction-btn');
+            const gameResultText = document.getElementById('game-result-text');
+            const shirokoFace = document.getElementById('shiroko-face');
+            const gameGrid = document.getElementById('game-grid');
+            let gameInProgress = false;
+
+            directionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (gameInProgress) return;
+                    gameInProgress = true;
+                    
+                    // Reset styles
+                    directionButtons.forEach(btn => btn.classList.remove('selected', 'win', 'lose'));
+                    shirokoFace.classList.remove('win', 'lose');
+                    gameGrid.classList.remove('win', 'lose');
+                    
+                    // Player selection
+                    const playerDirection = button.dataset.direction;
+                    button.classList.add('selected');
+                    gameResultText.textContent = 'ん、あっちむいて…';
+                    shirokoFace.textContent = '🤔';
+
+                    setTimeout(() => {
+                        // Shiroko's (AI) selection
+                        const directions = ['up', 'down', 'left', 'right'];
+                        const shirokoDirection = directions[Math.floor(Math.random() * directions.length)];
+                        
+                        // Update Shiroko's face
+                        const shirokoIcons = {'up': '🐺👆', 'down': '🐺👇', 'left': '🐺👈', 'right': '🐺👉'};
+                        shirokoFace.textContent = shirokoIcons[shirokoDirection];
+
+                        // Determine result
+                        if (playerDirection === shirokoDirection) {
+                            // Lose
+                            gameResultText.textContent = 'ん、私の勝ち';
+                            button.classList.add('lose');
+                            gameGrid.classList.add('lose');
+                        } else {
+                            // Win
+                            gameResultText.textContent = 'ん、あなたの勝ち…';
+                            button.classList.add('win');
+                            gameGrid.classList.add('win');
+                        }
+                        
+                        gameInProgress = false;
+                    }, 1000); // Shiroko "thinks" for 1 second
+                });
             });
             
 
