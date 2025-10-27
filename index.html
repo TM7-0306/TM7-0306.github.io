@@ -120,6 +120,52 @@
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
+
+        /* --- Mini Game Styles --- */
+        #game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            width: 240px; /* 80px * 3 */
+            height: 240px; /* 80px * 3 */
+            margin: 0 auto;
+        }
+        .direction-btn {
+            background-color: rgba(124, 58, 237, 0.2); /* bg-purple-600/20 */
+            border: 2px solid rgba(124, 58, 237, 0.5); /* border-purple-600/50 */
+            color: white;
+            font-size: 2rem; /* text-4xl */
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .direction-btn:hover, .direction-btn.selected {
+            background-color: rgba(124, 58, 237, 0.5); /* bg-purple-600/50 */
+            transform: scale(1.05);
+        }
+        /* Grid positions */
+        .direction-btn[data-direction="up"] { grid-area: 1 / 2 / 2 / 3; }
+        .direction-btn[data-direction="left"] { grid-area: 2 / 1 / 3 / 2; }
+        .direction-btn[data-direction="right"] { grid-area: 2 / 3 / 3 / 4; }
+        .direction-btn[data-direction="down"] { grid-area: 3 / 2 / 4 / 3; }
+        .game-center {
+            grid-area: 2 / 2 / 3 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        #shiroko-face {
+            transform: scale(0.8);
+        }
+        /* Result highlighting */
+        .win {
+            box-shadow: 0 0 20px 5px rgba(52, 211, 153, 0.7); /* Emerald-400 */
+        }
+        .lose {
+            box-shadow: 0 0 20px 5px rgba(248, 113, 113, 0.7); /* Red-400 */
+        }
     </style>
 </head>
 <body class="antialiased">
